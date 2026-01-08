@@ -133,6 +133,126 @@
   });
 })();
 
+// Project filter functionality
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  const projectCards = document.querySelectorAll('.st-project-card');
+
+  
+
+  filterBtns.forEach(btn => {
+
+    btn.addEventListener('click', () => {
+
+      const filter = btn.dataset.filter;
+
+      
+
+      // Update active button
+
+      filterBtns.forEach(b => {
+
+        b.classList.remove('active');
+
+        b.classList.add('bg-zinc-900/50', 'border-zinc-800', 'text-zinc-400');
+
+        b.classList.remove('bg-red-900/30', 'border-red-800', 'text-red-300');
+
+      });
+
+      
+
+      btn.classList.add('active');
+
+      btn.classList.remove('bg-zinc-900/50', 'border-zinc-800', 'text-zinc-400');
+
+      btn.classList.add('bg-red-900/30', 'border-red-800', 'text-red-300');
+
+      
+
+      // Filter projects
+
+      projectCards.forEach(card => {
+
+        if (filter === 'all' || card.dataset.category === filter) {
+
+          card.style.display = 'block';
+
+          gsap.fromTo(card, 
+
+            { opacity: 0, y: 20 }, 
+
+            { opacity: 1, y: 0, duration: 0.5 }
+
+          );
+
+        } else {
+
+          gsap.to(card, {
+
+            opacity: 0,
+
+            y: -20,
+
+            duration: 0.3,
+
+            onComplete: () => card.style.display = 'none'
+
+          });
+
+        }
+
+      });
+
+    });
+
+  });
+
+});
+
+
+
+// Animate skill bars on scroll
+
+const skillBars = document.querySelectorAll('.skill-progress');
+
+const skillObserver = new IntersectionObserver((entries) => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+
+      const bar = entry.target.querySelector('.bg-gradient-to-r');
+
+      const width = bar.style.width;
+
+      bar.style.width = '0%';
+
+      setTimeout(() => {
+
+        bar.style.transition = 'width 1.5s ease-out';
+
+        bar.style.width = width;
+
+      }, 200);
+
+      skillObserver.unobserve(entry.target);
+
+    }
+
+  });
+
+}, { threshold: 0.5 });
+
+
+
+skillBars.forEach(bar => skillObserver.observe(bar));
+
+// --- All remainder code in selection unchanged ---
+
 // SOLO-to-Navbar scroll/collapse + navbar pin anim, now responsive
 (() => {
   let landing = document.getElementById('top-solo');
@@ -753,4 +873,81 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     window.addEventListener('resize', setScrollIndicator);
   });
+  // Flicker effect for Stranger Things title
+function initSTFlicker() {
+  const flickerElements = document.querySelectorAll('.flicker-text');
+  flickerElements.forEach(el => {
+    setInterval(() => {
+      if (Math.random() > 0.93) {
+        el.style.opacity = Math.random() * 0.5 + 0.5;
+        setTimeout(() => el.style.opacity = 1, 50);
+      }
+    }, 100);
+  });
+}
+
+// Christmas lights animation
+function createChristmasLights() {
+  const container = document.querySelector('.st-lights-string');
+  if (!container) return;
+  
+  const colors = ['#ff0000', '#00ff00', '#ffff00', '#0000ff'];
+  for (let i = 0; i < 20; i++) {
+    const light = document.createElement('div');
+    light.className = 'st-light';
+    light.style.backgroundColor = colors[i % colors.length];
+    light.style.animationDelay = `${i * 0.1}s`;
+    container.appendChild(light);
+  }
+}
+
+// Magnetic tilt effect for project cards
+function initProjectCardTilt() {
+  const cards = document.querySelectorAll('.st-project-card');
+  
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+}
+
+// Upside Down particles
+function createSTParticles() {
+  const container = document.querySelector('.st-particles');
+  if (!container) return;
+  
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle st-spore';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.background = 'rgba(139, 0, 0, 0.6)';
+    particle.style.animationDuration = (Math.random() * 4 + 3) + 's';
+    particle.style.animationDelay = Math.random() * 2 + 's';
+    container.appendChild(particle);
+  }
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+  initSTFlicker();
+  createChristmasLights();
+  initProjectCardTilt();
+  createSTParticles();
+});
 })();
