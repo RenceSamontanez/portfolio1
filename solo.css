@@ -5,9 +5,9 @@ html, body {
   background: #01010a;
   color: #fff;
   font-size: 16px;
-  /* Responsive scaling */
   box-sizing: border-box;
 }
+
 body {
   overflow-x: hidden;
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -19,10 +19,10 @@ body {
 /* Section-specific backgrounds with blue hues */
 main {
   background: 
-    radial-gradient(ellipse 48vw 38vw at 20% 10%, rgba(6, 182, 212, 0.03), transparent 50%),
-    radial-gradient(ellipse 35vw 50vw at 80% 40%, rgba(14, 165, 233, 0.025), transparent 60%),
-    radial-gradient(ellipse 44vw 32vw at 50% 70%, rgba(56, 189, 248, 0.02), transparent 55%),
-    radial-gradient(ellipse 32vw 44vw at 30% 90%, rgba(6, 182, 212, 0.03), transparent 50%),
+    radial-gradient(ellipse 48vw 38vw at 20% 10%, rgba(6,182,212,0.03), transparent 50%),
+    radial-gradient(ellipse 35vw 50vw at 80% 40%, rgba(14,165,233,0.025), transparent 60%),
+    radial-gradient(ellipse 44vw 32vw at 50% 70%, rgba(56,189,248,0.02), transparent 55%),
+    radial-gradient(ellipse 32vw 44vw at 30% 90%, rgba(6,182,212,0.03), transparent 50%),
     #000000;
   min-height: 100vh;
 }
@@ -61,10 +61,10 @@ main {
 .robot-hero:active {
   transform: scale(0.95);
 }
+
 @media (max-width: 1050px) {
   .robot-hero-container {
     flex-direction: column;
-    align-items: stretch;
     gap: 2.2rem;
   }
   .robot-hero {
@@ -183,6 +183,11 @@ main {
   z-index: 30;
   padding: 0 1rem;
 }
+@media (max-width: 640px) {
+  .solo-landing-container {
+    padding: 0 0.5rem;
+  }
+}
 #solo-landing {
   font-size: clamp(2.4rem, 14vw, 8rem);
   font-family: 'Orbitron', sans-serif;
@@ -221,6 +226,12 @@ main {
   z-index: 50;
 }
 
+@media (max-width: 600px) {
+  .solo-navbar {
+    font-size: clamp(0.95rem, 4vw, 1rem);
+  }
+}
+
 .logo-container span {
   letter-spacing: .13em;
   font-family: 'Orbitron', sans-serif;
@@ -233,10 +244,17 @@ section {
   max-width: 100vw;
   box-sizing: border-box;
 }
+@media (max-width: 900px) {
+  section {
+    padding: 2rem 1vw;
+  }
+}
 @media (max-width: 768px) {
   section {
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
   }
 }
 @media (max-width: 500px) {
@@ -336,6 +354,12 @@ section {
 .feature-card.bounce-active .feature-card-desc,
 .feature-card:hover .feature-card-desc {
   color: var(--feature-desc-hover, #a3a3a3) !important;
+}
+@media (max-width: 600px) {
+  .feature-card {
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
 }
 
 /* CTA Button */
@@ -526,12 +550,16 @@ button[onclick*="scrollToSection"]:hover::before {
   section#about, section#expertise {
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
   }
 }
 @media (max-width: 480px) {
   section#about, section#expertise {
     padding-left: 0.4rem;
     padding-right: 0.4rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
   }
 }
 
@@ -575,6 +603,12 @@ button[onclick*="scrollToSection"]:hover::before {
   border: 1px solid rgba(255, 255, 255, 0.1);
   min-width: 0;
 }
+@media (max-width: 600px) {
+  .glass-card {
+    border-radius: 7px;
+    padding: 0.8em;
+  }
+}
 
 /* Smooth, minimalistic vertical-only scroll for achievements */
 .clean-achievement-scroll {
@@ -601,6 +635,11 @@ button[onclick*="scrollToSection"]:hover::before {
 .clean-achievement-scroll:focus::-webkit-scrollbar-thumb {
   background: #6ee7b7;
 }
+@media (max-width: 500px) {
+  .clean-achievement-scroll {
+    max-height: 30vh; /* Fit for mobile */
+  }
+}
 
 /* Hide scroll indicator if there is no overflow (JS will toggle .show) */
 .scroll-indicator-fade {
@@ -610,4 +649,169 @@ button[onclick*="scrollToSection"]:hover::before {
 }
 .clean-achievement-scroll.overflowing + .scroll-indicator-fade {
   opacity: 1;
+}
+
+/* Stranger Things Section Base */
+.stranger-things-section {
+  background: linear-gradient(180deg, #000000 0%, #0a0000 50%, #1a0505 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+@media (max-width: 700px) {
+  .stranger-things-section {
+    min-height: 280px;
+  }
+}
+
+/* Flickering Text Animation */
+.flicker-text {
+  animation: flicker 4s infinite;
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  font-size: clamp(1.2rem, 5vw, 2.5rem);
+}
+
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+  }
+  20%, 24%, 55% {
+    opacity: 0.7;
+    text-shadow: none;
+  }
+}
+
+/* ST Project Card */
+.st-project-card {
+  background: rgba(20, 0, 0, 0.8);
+  border: 2px solid #3a0000;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s;
+  min-width: 0;
+  width: 100%;
+  max-width: 99vw;
+  margin: 0 auto;
+}
+.st-project-card:hover {
+  border-color: #8B0000;
+  box-shadow: 0 0 30px rgba(220, 20, 60, 0.4);
+  transform: translateY(-5px);
+}
+@media (max-width: 600px) {
+  .st-project-card {
+    border-radius: 10px;
+    font-size: 0.97rem;
+    padding: 0.5rem;
+  }
+}
+
+/* TV Static Overlay */
+.st-static-overlay {
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml;base64,...'); /* noise pattern */
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.st-image-container:hover .st-static-overlay {
+  opacity: 0.15;
+  animation: static-noise 0.2s infinite;
+}
+
+@keyframes static-noise {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, -2px); }
+}
+
+
+/* Polaroid Frame */
+.st-image-frame {
+  background: #fff;
+  padding: 12px;
+  padding-bottom: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  transform: rotate(-2deg);
+  transition: transform 0.3s;
+}
+@media (max-width: 500px) {
+  .st-image-frame {
+    padding: 7px;
+    padding-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+}
+
+.st-project-card:hover .st-image-frame {
+  transform: rotate(0deg);
+}
+
+/* Tech Stack Showcase */
+.tech-stack-showcase {
+  margin-top: 80px;
+  padding: 60px 0;
+}
+@media (max-width: 800px) {
+  .tech-stack-showcase {
+    margin-top: 40px;
+    padding: 30px 0;
+  }
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  width: 100%;
+}
+@media (max-width: 1024px) {
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .tech-grid { grid-template-columns: 1fr; }
+}
+
+.tech-column {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 30px;
+  min-width: 0;
+  width: 100%;
+}
+@media (max-width: 800px) {
+  .tech-column {
+    padding: 18px;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 400px) {
+  .tech-column {
+    padding: 12px;
+  }
+}
+
+.highlight-column {
+  border: 2px solid #22d3ee;
+  background: rgba(34, 211, 238, 0.05);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.2);
+}
+.tech-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Responsive breakpoints for ST projects grid */
+@media (max-width: 1024px) {
+  .st-projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .st-projects-grid { grid-template-columns: 1fr; }
 }
